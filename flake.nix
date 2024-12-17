@@ -10,7 +10,8 @@
       homelab = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/homelab/services/home-assistant/home-assistant.nix
+          ./hosts/homelab/services/open-webui.nix
+          ./hosts/homelab/services/home-assistant.nix
           ./hosts/homelab/configuration.nix
         ];
       };
