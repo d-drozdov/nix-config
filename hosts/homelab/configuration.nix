@@ -97,8 +97,19 @@ in
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
+  # Disable password for my user
+  security.sudo.extraRules = [
+    {
+      users = [ "daniel" ];
+      commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ];
+    }
+  ];
+
+  # Specify programs
+  programs = {
+    firefox.enable = true;
+    nix-ld.enable = true;
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -116,14 +127,14 @@ in
   # };
 
   # List services that you want to enable:
+  services = {
+    openssh = {
+      enable = true;
+      settings.PasswordAuthentication = false;
+    };
 
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
+    tailscale.enable = true;
   };
-
-  services.vscode-server.enable = true;
 
   # Enable Docker
   virtualisation.docker = {
@@ -133,6 +144,8 @@ in
       setSocketVariable = true;
     };
   };
+  virtualisation.oci-containers.backend = "docker";
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
