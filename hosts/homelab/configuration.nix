@@ -132,7 +132,8 @@ in
       enable = true;
       settings.PasswordAuthentication = false;
     };
-
+    
+    blueman.enable = true;
     tailscale.enable = true;
   };
 

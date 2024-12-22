@@ -5,8 +5,9 @@
     home-assistant = {
       image = "ghcr.io/home-assistant/home-assistant:stable";
       volumes = [
-        "/etc/home-assistant/config:/config"
+        "/var/lib/home-assistant/config:/config"
         "/etc/localtime:/etc/localtime:ro"
+        "/run/dbus:/run/dbus:ro"
       ];
       environment = { TZ = "America/New_York"; };
       extraOptions = [
