@@ -1,0 +1,24 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character]
+success_symbol = '[➜](bold green)'   # Symbol for successful commands
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true                      # No package version information in the prompt
+
+# Username Module
+[username]
+show_always = true                   # Always show the username
+format = "[$user](bold yellow)"        # Format the username with bold blue style
+
+# Hostname Module
+[hostname]
+ssh_only = false                     # Show hostname even for local sessions
+format = "[@$hostname](bold green) in " # Format hostname with "@hostname in"
+
