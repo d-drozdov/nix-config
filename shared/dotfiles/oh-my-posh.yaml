@@ -1,0 +1,56 @@
+# Oh My Posh Configuration for Tokyo Night Theme
+version: 3
+final_space: true
+newline: true
+blocks:
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - type: text
+        style: plain
+        foreground: "#bb9af7" # bright purple
+        background: transparent
+        template: "<b>{{ .UserName }}</b>"
+      - type: text
+        style: plain
+        foreground: "#7dcfff" # bright cyan
+        background: transparent
+        template: "<b>@{{ .HostName }} in </b>"
+      - type: path
+        style: plain
+        foreground: "#7aa2f7" # cursor blue
+        background: transparent
+        template: "<b>{{ .Path }}</b> "
+        properties:
+          style: full
+      - type: git
+        style: plain
+        foreground: "#bb9af7" # bright purple
+        background: transparent
+        template: "<b>{{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if and (.BranchStatus) (or .Working.Changed .Staging.Changed (gt .StashCount 0)) }} | {{ end }}{{ if .Working.Changed }}\uF044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (or .Staging.Changed (gt .StashCount 0)) }} | {{ end }}{{ if .Staging.Changed }}\uF046 {{ .Staging.String }}{{ end }}{{ if and (.Staging.Changed) (gt .StashCount 0) }} | {{ end }}{{ if gt .StashCount 0 }}\uf0c7 {{ .StashCount }}{{ end }}</b>"
+        properties:
+          fetch_status: true
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - type: text
+        style: plain
+        background: transparent
+        foreground_templates:
+          - "{{if gt .Code 0}}#f7768e{{end}}" # Error: mild red
+          - "{{if eq .Code 0}}#7dcfff{{end}}" # Success: bright cyan
+        template: "❯"
+
+transient_prompt:
+  foreground_templates:
+    - "{{if gt .Code 0}}#f7768e{{end}}" # Error: mild red
+    - "{{if eq .Code 0}}#7dcfff{{end}}" # Success: bright cyan
+  background: transparent
+  template: "❯ "
+
+secondary_prompt:
+  background: transparent
+  foreground: "#7dcfff" # bright cyan
+  template: "❯❯ "

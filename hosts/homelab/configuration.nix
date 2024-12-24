@@ -85,6 +85,7 @@ in
     isNormalUser = true;
     description = "Daniel";
     extraGroups = [ "networkmanager" "wheel" "docker" ]; # Add user to groups
+    shell = pkgs.zsh;
     packages = with pkgs; [ ]; # Add user-specific packages here
   };
 
@@ -100,6 +101,7 @@ in
   programs = {
     firefox.enable = true; # Install Firefox
     nix-ld.enable = true;  # Enable nix-ld (for vscode-server)
+    zsh.enable = true;
   };
 
   # Allow unfree packages

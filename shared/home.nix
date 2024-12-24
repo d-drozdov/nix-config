@@ -1,8 +1,7 @@
-{ config, pkgs, ... }: 
-
+{ config, pkgs, ... }:
+let dotfilesDir = ./dotfiles; in 
 {
   home.stateVersion = "24.11";
-
   # Username is overridden per host
   home.username = config.home.overrideUsername or "daniel";
   home.homeDirectory = "/home/${config.home.overrideUsername or "daniel"}";
@@ -19,24 +18,22 @@
     tmux        
     tree        
     jq          
-    starship    
     htop        
     lf          
     awscli2     
     docker      
-    docker-compose 
+    docker-compose
 
     # Fonts
     fira-code
     jetbrains-mono
     source-code-pro
     noto-fonts-emoji
-    font-awesome
-
-
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
   ];
 
-  # Zsh (Oh My Zsh and Starship prompt shared across platforms)
+  # Zsh
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -45,8 +42,12 @@
       enable = true;
       plugins = [ "git" "z" "docker" "aws" ];
     };
+    initExtra = ''
+      eval "$(oh-my-posh init zsh --config ${dotfilesDir}/oh-my-posh.yaml)"
+    '';
   };
-  
-  programs.starship.enable = true; # Starship shell prompt
-  xdg.configFile."starship.toml".source = builtins.toPath ./dotfiles/starship.toml; # Reference the dotfile
+
+  programs.oh-my-posh = {
+    enable = true;
+  };
 }
