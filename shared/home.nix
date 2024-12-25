@@ -5,7 +5,8 @@ let dotfilesDir = ./dotfiles; in
   # Username is overridden per host
   home.username = config.home.overrideUsername or "daniel";
   home.homeDirectory = "/home/${config.home.overrideUsername or "daniel"}";
-
+  
+  fonts.fontconfig.enable = true;
   # Cross-platform packages (shared across macOS and NixOS)
   home.packages = with pkgs; [
     # Packages
@@ -29,9 +30,10 @@ let dotfilesDir = ./dotfiles; in
     jetbrains-mono
     source-code-pro
     noto-fonts-emoji
-    nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
   ];
+
 
   # Zsh
   programs.zsh = {
@@ -45,6 +47,7 @@ let dotfilesDir = ./dotfiles; in
     initExtra = ''
       eval "$(oh-my-posh init zsh --config ${dotfilesDir}/oh-my-posh.yaml)"
     '';
+
   };
 
   programs.oh-my-posh = {

@@ -7,11 +7,11 @@ blocks:
     alignment: left
     newline: true
     segments:
-      - type: text
-        style: plain
-        foreground: "#c0caf5" # Neutral white (Variables, Terminal White)
+      - type: session
+        style: diamond
+        foreground: "#c0caf5"
         background: transparent
-        template: "<b>{{if .Root}} {{ .UserName }}@{{ .HostName }} {{ end }}</b>"
+        template: "<b>{{ if .SSHSession }}{{ .UserName }}@{{ .HostName }} {{ end }}<\b>"
       - type: path
         style: plain
         foreground: "#7aa2f7" # Soft blue (Terminal Blue)
