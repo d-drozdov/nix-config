@@ -120,12 +120,32 @@ let user = "daniel"; in
         launchanim = true;
         mouse-over-hilite-stack = true;
         orientation = "bottom";
+
+        minimize-to-application= true;
         tilesize = 48;
+        magnification = true;
+        largesize = 72;
+        persistent-apps = [
+          "${pkgs.brave}/Applications/Brave Browser.app"
+          "${pkgs.alacritty}/Applications/Alacritty.app"
+          "${pkgs.vscode}/Applications/Visual Studio Code.app"
+          "${pkgs.spotify}/Applications/Spotify.app"
+          "/System/Applications/Messages.app"
+        ];
+        persistent-others = [
+          "~/Screenshots"
+          "$HOME/Downloads"
+        ];
       };
 
       finder = {
+        AppleShowAllExtensions = true;
+        ShowPathbar = true;
+        FXPreferredViewStyle = "clmv";
         _FXShowPosixPathInTitle = false;
       };
+
+      screencapture.location = "$HOME/Pictures/Screenshots";
 
       trackpad = {
         Clicking = true;
@@ -137,6 +157,4 @@ let user = "daniel"; in
     #   enableKeyMapping = true;
     # };
   };
-
-  # services.tailscale.enable = true;  # failing as of 2024-09-08
 }

@@ -1,25 +1,9 @@
 _:
 
 [
-  # Development Tools
   "sublime-text"
-
-
-  # Communication Tools
-  # "zoom"
-
-  # Browsers
-
-  # Security
-
-
-  # System
   "oversight"
-  # "rectangle"
-  # "alt-tab"
-
-  # Music and entertainment
-
-
-  # Misc
+  "google-drive"  
+  "cryptomator"
+  # "macos-fuse-t/homebrew-cask/fuse-t"
 ]

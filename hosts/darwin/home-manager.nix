@@ -38,9 +38,7 @@ in
     };
 
     casks = pkgs.callPackage ./casks.nix { };
-    # brews = [
-    #   "cocoapods"
-    # ];
+    brews = [ ];
 
     # These app IDs are from using the mas CLI app
     # mas = mac app store
@@ -94,8 +92,20 @@ in
           lfs.enable = true;
           extraConfig = {
             init.defaultBranch = "main";
+          }; 
+        };
+
+      ssh = {
+        enable = true;
+        matchBlocks = {
+          "github.com" = {
+            user = "git";
+            identitiesOnly = true;
+            identityFile = "/Users/${user}/.ssh/id_ed25519_github";
           };
         };
+      };
+      
 
       };
     };
