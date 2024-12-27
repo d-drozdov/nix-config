@@ -1,4 +1,4 @@
-{ config, pkgs,  ... }:
+{ config, pkgs,  nixpkgs, ... }:
 
 let user = "daniel"; in
 
@@ -34,23 +34,55 @@ let user = "daniel"; in
   # Turn off NIX_PATH warnings now that we're using flakes
   system.checks.verifyNixPath = false;
 
+
+  system.activationScripts.applications.text = let
+      env = pkgs.buildEnv {
+        name = "system-applications";
+        paths = config.environment.systemPackages;
+        pathsToLink = "/Applications";
+      };
+    in
+      pkgs.lib.mkForce ''
+      # Set up applications.
+      echo "setting up /Applications..." >&2
+      rm -rf /Applications/Nix\ Apps
+      mkdir -p /Applications/Nix\ Apps
+      find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
+      while read -r src; do
+        app_name=$(basename "$src")
+        echo "copying $src" >&2
+        ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
+      done
+          '';
+
+
+  nixpkgs.config.allowUnfree = true;
   # Load configuration that is shared across systems
   environment.systemPackages = with pkgs; [
-      #     # Packages
-      # vim         
-      # git         
-      # curl        
-      # wget        
-      # zip         
-      # unzip       
-      # tmux        
-      # tree        
-      # jq          
-      # htop        
-      # lf          
-      # awscli2     
-      # docker      
-      # docker-compose
+      # Packages
+      vim         
+      git         
+      curl        
+      wget        
+      zip         
+      unzip       
+      tmux        
+      tree        
+      jq          
+      htop        
+      lf          
+      awscli2     
+      docker      
+      docker-compose
+
+      alacritty
+      spotify
+      vscode
+      brave
+      raycast
+      alt-tab-macos
+      rectangle
+      zoom-us
   ];
 
   fonts.packages = with pkgs; [

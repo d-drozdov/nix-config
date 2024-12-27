@@ -9,18 +9,17 @@ _:
   # "zoom"
 
   # Browsers
-  "brave-browser"
 
   # Security
 
 
   # System
   "oversight"
-  "rectangle"
-  "alt-tab"
+  # "rectangle"
+  # "alt-tab"
 
   # Music and entertainment
-  "spotify"
+
 
   # Misc
 ]

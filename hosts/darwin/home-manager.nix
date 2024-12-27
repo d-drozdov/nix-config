@@ -1,7 +1,9 @@
 { config, pkgs, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, ... }:
 let 
-ohMyPoshConfig = ../../shared/dotfiles/oh-my-posh.yaml;
-user = "daniel";
+  ohMyPoshConfig = ../../shared/dotfiles/oh-my-posh.yaml;
+  user = "daniel";
+  name = "Daniel Drozdov";
+  email = "ddrozdov12@gmail.com";
 in 
 {
     users.users.${user} = {
@@ -11,11 +13,11 @@ in
     shell = pkgs.zsh;
   };
 
-
+  # Set up nix-homebrew config, usually stored in the flake.nix, but I moved it here to clean up the main flake
   nix-homebrew = {
     enable = true;  # Enable Homebrew integration
     enableRosetta = true;  # Enable Rosetta for Intel emulation on Apple Silicon
-    user = "daniel";  # User owning the Homebrew prefix
+    user = "${user}";  # User owning the Homebrew prefix
     taps = {
       "homebrew/homebrew-core" = homebrew-core;
       "homebrew/homebrew-cask" = homebrew-cask;
@@ -28,7 +30,7 @@ in
 
   homebrew = {
     enable = true;
-    
+
     onActivation = {
       autoUpdate = true;
       cleanup = "zap";
@@ -49,7 +51,7 @@ in
     #
     masApps = {
       "Bitwarden" = 1352778147; # Installed this way to allow for browser integration
-      # "Tailscale" = 1475387142;
+      "Tailscale" = 1475387142; # I like the gui
     };
   };
 
@@ -65,22 +67,36 @@ in
         ];
       };
 
-      programs.zsh = {
-        enable = true;
-        enableCompletion = true;
-        syntaxHighlighting.enable = true;
-        oh-my-zsh = {
+      programs = {
+        zsh = {
           enable = true;
-          plugins = [ "git" "z" "docker" "aws" ];
+          enableCompletion = true;
+          syntaxHighlighting.enable = true;
+          oh-my-zsh = {
+            enable = true;
+            plugins = [ "git" "z" "docker" "aws" ];
+          };
+          initExtra = ''
+            # Initialize Oh My Posh with Zsh
+            eval "$(oh-my-posh init zsh --config ${ohMyPoshConfig})"
+          '';
         };
-        initExtra = ''
-          eval "$(oh-my-posh init zsh --config ${ohMyPoshConfig})"
-        '';
 
-      };
+        oh-my-posh = {
+          enable = true;
+        };
 
-      programs.oh-my-posh = {
-        enable = true;
+        git = {
+          enable = true;
+          ignores = [ "*.swp" "*.DS_Store" ];
+          userName = name;
+          userEmail = email;
+          lfs.enable = true;
+          extraConfig = {
+            init.defaultBranch = "main";
+          };
+        };
+
       };
     };
 
