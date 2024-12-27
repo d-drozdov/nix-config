@@ -1,6 +1,5 @@
 {
   description = "My NixOS configuration managed with flakes";
-  darwinSystems = [ "aarch64-darwin" "x86_64-darwin" ];
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";       # Main NixOS package source
     home-manager.url = "github:nix-community/home-manager";   # Home Manager integration
