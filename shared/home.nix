@@ -6,7 +6,7 @@ let dotfilesDir = ./dotfiles; in
   home.username = config.home.overrideUsername or "daniel";
   home.homeDirectory = "/home/${config.home.overrideUsername or "daniel"}";
   
-  fonts.fontconfig.enable = true;
+  # fonts.fontconfig.enable = true;
   # Cross-platform packages (shared across macOS and NixOS)
   home.packages = with pkgs; [
     # Packages

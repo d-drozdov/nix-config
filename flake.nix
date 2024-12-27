@@ -67,7 +67,6 @@
               autoMigrate = true;   # Enable auto-migration of Homebrew installations
             };
           }
-
           ./hosts/darwin  # Include additional macOS configuration
         ];
       };

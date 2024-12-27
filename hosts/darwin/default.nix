@@ -3,10 +3,8 @@
 let user = "daniel"; in
 
 {
-
   imports = [
-    ../../modules/darwin/home-manager.nix
-    ../../modules/shared
+    ./home-manager.nix
   ];
 
   # Auto upgrade nix package and the daemon service.
@@ -35,8 +33,7 @@ let user = "daniel"; in
 
   # Load configuration that is shared across systems
   environment.systemPackages = with pkgs; [
-  ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
-
+  ];
   system = {
     stateVersion = 4;
 
