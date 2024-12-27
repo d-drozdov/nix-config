@@ -1,11 +1,12 @@
 {
   description = "My NixOS configuration managed with flakes";
+  
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";       # Main NixOS package source
-    home-manager.url = "github:nix-community/home-manager";   # Home Manager integration
-    darwin = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";  # Main NixOS package source
+    home-manager.url = "github:nix-community/home-manager";  # Home Manager integration
+    nix-darwin = {
       url = "github:LnL7/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";  # Ensure Darwin follows the nixpkgs source
     };
     nix-homebrew = {
       url = "github:zhaofengli-wip/nix-homebrew";
@@ -22,14 +23,10 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, ... } @ inputs: 
-   let 
-      darwinSystems = [ "aarch64-darwin" "x86_64-darwin" ];
-    in
-    {
+  outputs = { self, nixpkgs, home-manager, nix-darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, ... } @ inputs: {
+    # NixOS configurations
     nixosConfigurations = {
       homelab = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -45,33 +42,35 @@
         ];
       };
     };
-    darwinConfigurations = nixpkgs.lib.genAttrs darwinSystems (system: darwin.lib.darwinSystem {
-      inherit system;
-      specialArgs = inputs;
-      modules = [
-        home-manager.darwinModules.home-manager
-        nix-homebrew.darwinModules.nix-homebrew
-        {
-          nix-homebrew = {
-            # Install Homebrew under the default prefix
-            enable = true;
 
-            # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-            enableRosetta = true;
+    # Darwin configurations (macOS)
+    darwinConfigurations = {
+      darwin = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";  # Target system architecture (Apple Silicon)
 
-            # User owning the Homebrew prefix
-            user = "daniel";
-            taps = {
-              "homebrew/homebrew-core" = homebrew-core;
-              "homebrew/homebrew-cask" = homebrew-cask;
-              "homebrew/homebrew-bundle" = homebrew-bundle;
+        specialArgs = inputs;
+
+        modules = [
+          home-manager.darwinModules.home-manager
+          nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              enable = true;  # Enable Homebrew integration
+              enableRosetta = true;  # Enable Rosetta for Intel emulation on Apple Silicon
+              user = "daniel";  # User owning the Homebrew prefix
+              taps = {
+                "homebrew/homebrew-core" = homebrew-core;
+                "homebrew/homebrew-cask" = homebrew-cask;
+                "homebrew/homebrew-bundle" = homebrew-bundle;
+              };
+              mutableTaps = false;  # Disallow modifying taps
+              autoMigrate = true;   # Enable auto-migration of Homebrew installations
             };
-            mutableTaps = false;
-            autoMigrate = true;
-          };
-        }
-        ./hosts/darwin
-      ];
-    });
+          }
+
+          ./hosts/darwin  # Include additional macOS configuration
+        ];
+      };
+    };
   };
 }
