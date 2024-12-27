@@ -25,7 +25,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, ... } @ inputs: {
+  outputs = { self, nixpkgs, home-manager, nix-darwin, nix-homebrew,  ... } @ inputs: {
     # NixOS configurations
     nixosConfigurations = {
       homelab = nixpkgs.lib.nixosSystem {
@@ -53,20 +53,20 @@
         modules = [
           home-manager.darwinModules.home-manager
           nix-homebrew.darwinModules.nix-homebrew
-          {
-            nix-homebrew = {
-              enable = true;  # Enable Homebrew integration
-              enableRosetta = true;  # Enable Rosetta for Intel emulation on Apple Silicon
-              user = "daniel";  # User owning the Homebrew prefix
-              taps = {
-                "homebrew/homebrew-core" = homebrew-core;
-                "homebrew/homebrew-cask" = homebrew-cask;
-                "homebrew/homebrew-bundle" = homebrew-bundle;
-              };
-              mutableTaps = false;  # Disallow modifying taps
-              autoMigrate = true;   # Enable auto-migration of Homebrew installations
-            };
-          }
+          # {
+          #   nix-homebrew = {
+          #     enable = true;  # Enable Homebrew integration
+          #     enableRosetta = true;  # Enable Rosetta for Intel emulation on Apple Silicon
+          #     user = "daniel";  # User owning the Homebrew prefix
+          #     taps = {
+          #       "homebrew/homebrew-core" = homebrew-core;
+          #       "homebrew/homebrew-cask" = homebrew-cask;
+          #       "homebrew/homebrew-bundle" = homebrew-bundle;
+          #     };
+          #     mutableTaps = false;  # Disallow modifying taps
+          #     autoMigrate = true;   # Enable auto-migration of Homebrew installations
+          #   };
+          # }
           ./hosts/darwin  # Include additional macOS configuration
         ];
       };

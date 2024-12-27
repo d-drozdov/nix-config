@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs,  ... }:
 
 let user = "daniel"; in
 
@@ -6,6 +6,9 @@ let user = "daniel"; in
   imports = [
     ./home-manager.nix
   ];
+  
+  # Use TouchID for sudo
+  security.pam.enableSudoTouchIdAuth = true;
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
@@ -33,7 +36,33 @@ let user = "daniel"; in
 
   # Load configuration that is shared across systems
   environment.systemPackages = with pkgs; [
+      #     # Packages
+      # vim         
+      # git         
+      # curl        
+      # wget        
+      # zip         
+      # unzip       
+      # tmux        
+      # tree        
+      # jq          
+      # htop        
+      # lf          
+      # awscli2     
+      # docker      
+      # docker-compose
   ];
+
+  fonts.packages = with pkgs; [
+    # Fonts
+    fira-code
+    jetbrains-mono
+    source-code-pro
+    noto-fonts-emoji
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
+  ];
+
   system = {
     stateVersion = 4;
 
@@ -54,7 +83,7 @@ let user = "daniel"; in
       };
 
       dock = {
-        autohide = false;
+        autohide = true;
         show-recents = false;
         launchanim = true;
         mouse-over-hilite-stack = true;
@@ -72,10 +101,9 @@ let user = "daniel"; in
       };
     };
 
-    keyboard = {
-      enableKeyMapping = true;
-      remapCapsLockToEscape = true;
-    };
+    # keyboard = {
+    #   enableKeyMapping = true;
+    # };
   };
 
   # services.tailscale.enable = true;  # failing as of 2024-09-08
