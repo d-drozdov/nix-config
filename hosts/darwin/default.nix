@@ -133,8 +133,8 @@ let user = "daniel"; in
           "/System/Applications/Messages.app"
         ];
         persistent-others = [
-          "~/Screenshots"
-          "$HOME/Downloads"
+          "/Users/${user}/Pictures/Screenshots"
+          "/Users/${user}/Downloads"
         ];
       };
 
@@ -145,7 +145,7 @@ let user = "daniel"; in
         _FXShowPosixPathInTitle = false;
       };
 
-      screencapture.location = "$HOME/Pictures/Screenshots";
+      screencapture.location = "/Users/${user}/Pictures/Screenshots";
 
       trackpad = {
         Clicking = true;

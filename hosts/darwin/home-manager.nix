@@ -1,4 +1,4 @@
-{ config, pkgs, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, ... }:
+{ config, pkgs, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, fuse-t-cask, ... }:
 let 
   ohMyPoshConfig = ../../shared/dotfiles/oh-my-posh.yaml;
   user = "daniel";
@@ -22,6 +22,7 @@ in
       "homebrew/homebrew-core" = homebrew-core;
       "homebrew/homebrew-cask" = homebrew-cask;
       "homebrew/homebrew-bundle" = homebrew-bundle;
+      "macos-fuse-t/homebrew-cask" = fuse-t-cask;
     };
     mutableTaps = false;  # Disallow modifying taps
     autoMigrate = true;   # Enable auto-migration of Homebrew installations

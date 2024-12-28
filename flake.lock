@@ -35,6 +35,22 @@
         "type": "github"
       }
     },
+    "fuse-t-cask": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1730376940,
+        "narHash": "sha256-dFygt5bGZuXdVz7lc9FVNcZeh+5vYSLxuzuGuS8kAww=",
+        "owner": "macos-fuse-t",
+        "repo": "homebrew-cask",
+        "rev": "89db9d859680208df566a9e60db74bdfe3ef33ce",
+        "type": "github"
+      },
+      "original": {
+        "owner": "macos-fuse-t",
+        "repo": "homebrew-cask",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -224,6 +240,7 @@
     },
     "root": {
       "inputs": {
+        "fuse-t-cask": "fuse-t-cask",
         "home-manager": "home-manager",
         "homebrew-bundle": "homebrew-bundle",
         "homebrew-cask": "homebrew-cask",

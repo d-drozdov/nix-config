@@ -23,6 +23,10 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    fuse-t-cask = {
+      url = "github:macos-fuse-t/homebrew-cask";
+      flake = false;
+    };
  
   };
 
