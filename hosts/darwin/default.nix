@@ -7,6 +7,7 @@
 
 let
   user = "daniel";
+  packages = import ./packages.nix { inherit pkgs; };
 in
 
 {
@@ -48,6 +49,7 @@ in
   # Turn off NIX_PATH warnings now that we're using flakes
   system.checks.verifyNixPath = false;
 
+  # Set up alaising for applications downloaded via nix on mac
   system.activationScripts.applications.text =
     let
       env = pkgs.buildEnv {
@@ -71,43 +73,7 @@ in
 
   nixpkgs.config.allowUnfree = true;
   # Load configuration that is shared across systems
-  environment.systemPackages = with pkgs; [
-    # Packages
-    vim
-    git
-    curl
-    wget
-    zip
-    unzip
-    tmux
-    tree
-    jq
-    htop
-    lf
-    awscli2
-    docker
-    docker-compose
-    nixfmt-rfc-style
-
-    alacritty
-    spotify
-    vscode
-    brave
-    raycast
-    alt-tab-macos
-    rectangle
-    zoom-us
-  ];
-
-  fonts.packages = with pkgs; [
-    # Fonts
-    fira-code
-    jetbrains-mono
-    source-code-pro
-    noto-fonts-emoji
-    nerd-fonts.fira-code
-    nerd-fonts.jetbrains-mono
-  ];
+  environment.systemPackages = packages;
 
   system = {
     stateVersion = 4;

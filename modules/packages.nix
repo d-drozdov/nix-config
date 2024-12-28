@@ -1,5 +1,4 @@
 { pkgs, ... }:
-# These are system level packages, all other should go under home.nix home packages
 with pkgs;
 [
   docker # Docker for managing containers at the system level
