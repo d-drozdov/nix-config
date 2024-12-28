@@ -12,6 +12,7 @@
 # Import the common packages from the shared location
 let
   packages = import ../shared/packages.nix { inherit pkgs; };
+  sharedFonts = import ../shared/fonts.nix { inherit pkgs; };
 in
 {
   imports = [
@@ -125,7 +126,8 @@ in
   nixpkgs.config.allowUnfree = true;
 
   # Install system-wide packages
-  environment.systemPackages = commonPackages;
+  environment.systemPackages = packages;
+  fonts.packages = sharedFonts;
 
   # Enable desired services
   services = {

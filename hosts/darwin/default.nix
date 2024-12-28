@@ -8,6 +8,7 @@
 let
   user = "daniel";
   packages = import ./packages.nix { inherit pkgs; };
+  sharedFonts = import ../shared/fonts.nix { inherit pkgs; };
 in
 
 {
@@ -74,6 +75,7 @@ in
   nixpkgs.config.allowUnfree = true;
   # Load configuration that is shared across systems
   environment.systemPackages = packages;
+  fonts.packages = sharedFonts;
 
   system = {
     stateVersion = 4;
