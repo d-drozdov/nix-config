@@ -1,10 +1,11 @@
 { pkgs, ... }:
 
 with pkgs;
-let 
-  shared-packages = import ../shared/packages.nix { inherit pkgs; }; 
+let
+  shared-packages = import ../shared/packages.nix { inherit pkgs; };
 in
-shared-packages ++ [
+shared-packages
+++ [
   iputils # Network tools (e.g., "ping")
   openssh # Secure shell (SSH server/client)
   systemd # NixOS init system

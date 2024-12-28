@@ -8,8 +8,7 @@ in
   home.username = config.home.overrideUsername or "daniel";
   home.homeDirectory = "/home/${config.home.overrideUsername or "daniel"}";
 
-
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [ ];
 
   # Zsh
   programs.zsh = {

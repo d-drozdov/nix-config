@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs;
 [
   # CLI TOOLS
@@ -23,7 +23,6 @@ with pkgs;
   spotify
   vscode
   brave
-
 
   # Fonts
   fira-code
