@@ -11,7 +11,7 @@
 
 # Import the common packages from the shared location
 let
-  commonPackages = import ../../modules/packages.nix { inherit pkgs; };
+  packages = import ../shared/packages.nix { inherit pkgs; };
 in
 {
   imports = [
@@ -98,7 +98,7 @@ in
       "docker"
     ]; # Add user to groups
     shell = pkgs.zsh;
-    packages = with pkgs; [ ]; # Add user-specific packages here
+    packages = packages; # Add user-specific packages here
   };
 
   # Disable password for sudo for the "daniel" user

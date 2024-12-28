@@ -9,8 +9,8 @@
   ...
 }:
 let
-  ohMyPoshConfig = ../../shared/dotfiles/oh-my-posh.yaml;
-  alacrittyConfig = ../../shared/dotfiles/alacritty.toml;
+  ohMyPoshConfig = ../shared/dotfiles/oh-my-posh.yaml;
+  alacrittyConfig = ../shared/dotfiles/alacritty.toml;
   user = "daniel";
   name = "Daniel Drozdov";
   email = "ddrozdov12@gmail.com";

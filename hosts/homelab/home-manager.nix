@@ -8,33 +8,8 @@ in
   home.username = config.home.overrideUsername or "daniel";
   home.homeDirectory = "/home/${config.home.overrideUsername or "daniel"}";
 
-  # fonts.fontconfig.enable = true;
-  # Cross-platform packages (shared across macOS and NixOS)
-  home.packages = with pkgs; [
-    # Packages
-    vim
-    git
-    curl
-    wget
-    zip
-    unzip
-    tmux
-    tree
-    jq
-    htop
-    lf
-    awscli2
-    docker
-    docker-compose
 
-    # Fonts
-    fira-code
-    jetbrains-mono
-    source-code-pro
-    noto-fonts-emoji
-    nerd-fonts.fira-code
-    nerd-fonts.jetbrains-mono
-  ];
+  home.packages = with pkgs; [];
 
   # Zsh
   programs.zsh = {

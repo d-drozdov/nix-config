@@ -4,10 +4,14 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # Main NixOS package source
     home-manager.url = "github:nix-community/home-manager"; # Home Manager integration
+
+    # Mac Stuff
     nix-darwin = {
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs"; # Ensure Darwin follows the nixpkgs source
     };
+
+    # Homebrew stuff
     nix-homebrew = {
       url = "github:zhaofengli-wip/nix-homebrew";
     };
@@ -51,7 +55,7 @@
             ./hosts/homelab/services/home-assistant.nix # Service: Home Assistant
             home-manager.nixosModules.home-manager # Enable Home Manager
             {
-              home-manager.users.daniel = import ./shared/home.nix; # User config for 'daniel'
+              home-manager.users.daniel = import ../../homelab/home-manager.nix; # User config for 'daniel'
             }
           ];
         };

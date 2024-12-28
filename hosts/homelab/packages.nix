@@ -1,8 +1,10 @@
 { pkgs, ... }:
+
 with pkgs;
-[
-  docker # Docker for managing containers at the system level
-  docker-compose # Compose tool for Docker
+let 
+  shared-packages = import ../shared/packages.nix { inherit pkgs; }; 
+in
+shared-packages ++ [
   iputils # Network tools (e.g., "ping")
   openssh # Secure shell (SSH server/client)
   systemd # NixOS init system
