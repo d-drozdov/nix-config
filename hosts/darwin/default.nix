@@ -1,12 +1,19 @@
-{ config, pkgs,  nixpkgs, ... }:
+{
+  config,
+  pkgs,
+  nixpkgs,
+  ...
+}:
 
-let user = "daniel"; in
+let
+  user = "daniel";
+in
 
 {
   imports = [
     ./home-manager.nix
   ];
-  
+
   # Use TouchID for sudo
   security.pam.enableSudoTouchIdAuth = true;
 
@@ -16,12 +23,19 @@ let user = "daniel"; in
   # Setup user, packages, programs
   nix = {
     package = pkgs.nix;
-    settings.trusted-users = [ "@admin" "${user}" ];
+    settings.trusted-users = [
+      "@admin"
+      "${user}"
+    ];
 
     gc = {
       user = "root";
       automatic = true;
-      interval = { Weekday = 0; Hour = 2; Minute = 0; };
+      interval = {
+        Weekday = 0;
+        Hour = 2;
+        Minute = 0;
+      };
       options = "--delete-older-than 30d";
     };
 
@@ -34,15 +48,15 @@ let user = "daniel"; in
   # Turn off NIX_PATH warnings now that we're using flakes
   system.checks.verifyNixPath = false;
 
-
-  system.activationScripts.applications.text = let
+  system.activationScripts.applications.text =
+    let
       env = pkgs.buildEnv {
         name = "system-applications";
         paths = config.environment.systemPackages;
         pathsToLink = "/Applications";
       };
     in
-      pkgs.lib.mkForce ''
+    pkgs.lib.mkForce ''
       # Set up applications.
       echo "setting up /Applications..." >&2
       rm -rf /Applications/Nix\ Apps
@@ -53,36 +67,36 @@ let user = "daniel"; in
         echo "copying $src" >&2
         ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
       done
-          '';
-
+    '';
 
   nixpkgs.config.allowUnfree = true;
   # Load configuration that is shared across systems
   environment.systemPackages = with pkgs; [
-      # Packages
-      vim         
-      git         
-      curl        
-      wget        
-      zip         
-      unzip       
-      tmux        
-      tree        
-      jq          
-      htop        
-      lf          
-      awscli2     
-      docker      
-      docker-compose
+    # Packages
+    vim
+    git
+    curl
+    wget
+    zip
+    unzip
+    tmux
+    tree
+    jq
+    htop
+    lf
+    awscli2
+    docker
+    docker-compose
+    nixfmt-rfc-style
 
-      alacritty
-      spotify
-      vscode
-      brave
-      raycast
-      alt-tab-macos
-      rectangle
-      zoom-us
+    alacritty
+    spotify
+    vscode
+    brave
+    raycast
+    alt-tab-macos
+    rectangle
+    zoom-us
   ];
 
   fonts.packages = with pkgs; [
@@ -121,7 +135,7 @@ let user = "daniel"; in
         mouse-over-hilite-stack = true;
         orientation = "bottom";
 
-        minimize-to-application= true;
+        minimize-to-application = true;
         tilesize = 48;
         magnification = true;
         largesize = 72;

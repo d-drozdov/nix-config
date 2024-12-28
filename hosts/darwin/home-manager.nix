@@ -1,12 +1,22 @@
-{ config, pkgs, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, fuse-t-cask, ... }:
-let 
+{
+  config,
+  pkgs,
+  nix-homebrew,
+  homebrew-bundle,
+  homebrew-core,
+  homebrew-cask,
+  fuse-t-cask,
+  ...
+}:
+let
   ohMyPoshConfig = ../../shared/dotfiles/oh-my-posh.yaml;
+  alacrittyConfig = ../../shared/dotfiles/alacritty.toml;
   user = "daniel";
   name = "Daniel Drozdov";
   email = "ddrozdov12@gmail.com";
-in 
+in
 {
-    users.users.${user} = {
+  users.users.${user} = {
     name = "${user}";
     home = "/Users/${user}";
     isHidden = false;
@@ -15,19 +25,18 @@ in
 
   # Set up nix-homebrew config, usually stored in the flake.nix, but I moved it here to clean up the main flake
   nix-homebrew = {
-    enable = true;  # Enable Homebrew integration
-    enableRosetta = true;  # Enable Rosetta for Intel emulation on Apple Silicon
-    user = "${user}";  # User owning the Homebrew prefix
+    enable = true; # Enable Homebrew integration
+    enableRosetta = true; # Enable Rosetta for Intel emulation on Apple Silicon
+    user = "${user}"; # User owning the Homebrew prefix
     taps = {
       "homebrew/homebrew-core" = homebrew-core;
       "homebrew/homebrew-cask" = homebrew-cask;
       "homebrew/homebrew-bundle" = homebrew-bundle;
       "macos-fuse-t/homebrew-cask" = fuse-t-cask;
     };
-    mutableTaps = false;  # Disallow modifying taps
-    autoMigrate = true;   # Enable auto-migration of Homebrew installations
+    mutableTaps = false; # Disallow modifying taps
+    autoMigrate = true; # Enable auto-migration of Homebrew installations
   };
-
 
   homebrew = {
     enable = true;
@@ -56,60 +65,76 @@ in
 
   home-manager = {
     useGlobalPkgs = true;
-    users.${user} = { pkgs, config, lib, ... }: {
-      home = {
-        enableNixpkgsReleaseCheck = false;
-        stateVersion = "24.11";
+    users.${user} =
+      {
+        pkgs,
+        config,
+        lib,
+        ...
+      }:
+      {
 
-         packages = with pkgs; [
+        home = {
+          enableNixpkgsReleaseCheck = false;
+          stateVersion = "24.11";
 
-        ];
-      };
+          packages = with pkgs; [
 
-      programs = {
-        zsh = {
-          enable = true;
-          enableCompletion = true;
-          syntaxHighlighting.enable = true;
-          oh-my-zsh = {
+          ];
+        };
+
+        programs = {
+          zsh = {
             enable = true;
-            plugins = [ "git" "z" "docker" "aws" ];
+            enableCompletion = true;
+            syntaxHighlighting.enable = true;
+            oh-my-zsh = {
+              enable = true;
+              plugins = [
+                "git"
+                "z"
+                "docker"
+                "aws"
+              ];
+            };
+            initExtra = ''
+              # Initialize Oh My Posh with Zsh
+              eval "$(oh-my-posh init zsh --config ${ohMyPoshConfig})"
+            '';
           };
-          initExtra = ''
-            # Initialize Oh My Posh with Zsh
-            eval "$(oh-my-posh init zsh --config ${ohMyPoshConfig})"
-          '';
-        };
 
-        oh-my-posh = {
-          enable = true;
-        };
+          oh-my-posh = {
+            enable = true;
+          };
 
-        git = {
-          enable = true;
-          ignores = [ "*.swp" "*.DS_Store" ];
-          userName = name;
-          userEmail = email;
-          lfs.enable = true;
-          extraConfig = {
-            init.defaultBranch = "main";
-          }; 
-        };
+          git = {
+            enable = true;
+            ignores = [
+              "*.swp"
+              "*.DS_Store"
+            ];
+            userName = name;
+            userEmail = email;
+            lfs.enable = true;
+            extraConfig = {
+              init.defaultBranch = "main";
+            };
+          };
 
-      ssh = {
-        enable = true;
-        matchBlocks = {
-          "github.com" = {
-            user = "git";
-            identitiesOnly = true;
-            identityFile = "/Users/${user}/.ssh/id_ed25519_github";
+          ssh = {
+            enable = true;
+            matchBlocks = {
+              "github.com" = {
+                user = "git";
+                identitiesOnly = true;
+                identityFile = "/Users/${user}/.ssh/id_ed25519_github";
+              };
+            };
           };
         };
+        xdg.configFile."alacritty/alacritty.toml".text = builtins.readFile "${alacrittyConfig}";
       };
-      
-
-      };
-    };
 
   };
+
 }

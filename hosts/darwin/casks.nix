@@ -3,7 +3,7 @@ _:
 [
   "sublime-text"
   "oversight"
-  "google-drive"  
+  "google-drive"
   "cryptomator"
-  # "macos-fuse-t/cask/fuse-t"
+  "macos-fuse-t/cask/fuse-t"
 ]

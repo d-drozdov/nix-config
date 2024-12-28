@@ -1,0 +1,39 @@
+# Alacritty Configuration File
+
+# Colors (One Dark)
+[colors.primary]
+background = '#282c34'
+foreground = '#abb2bf'
+
+[colors.normal]
+black   = '#1e2127'
+red     = '#e06c75'
+green   = '#98c379'
+yellow  = '#d19a66'
+blue    = '#61afef'
+magenta = '#c678dd'
+cyan    = '#56b6c2'
+white   = '#abb2bf'
+
+[colors.bright]
+black   = '#5c6370'
+red     = '#e06c75'
+green   = '#98c379'
+yellow  = '#d19a66'
+blue    = '#61afef'
+magenta = '#c678dd'
+cyan    = '#56b6c2'
+white   = '#ffffff'
+
+# Font settings
+[font]
+normal.family = "JetBrainsMono Nerd Font"  # Use JetBrains Mono Nerd Font
+size = 16.0                                # Set font size to 16 points
+
+# Cursor settings
+[cursor]
+style = "Block"       # Cursor shape: 'Block', 'Underline', or 'Beam'
+
+# Window settings
+[window]
+decorations = "full"   # Options: full, none, transparent, buttonless

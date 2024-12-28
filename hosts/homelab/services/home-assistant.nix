@@ -9,9 +9,11 @@
         "/etc/localtime:/etc/localtime:ro"
         "/run/dbus:/run/dbus:ro"
       ];
-      environment = { TZ = "America/New_York"; };
+      environment = {
+        TZ = "America/New_York";
+      };
       extraOptions = [
-        "--network=host" 
+        "--network=host"
         "--privileged=true"
       ];
     };

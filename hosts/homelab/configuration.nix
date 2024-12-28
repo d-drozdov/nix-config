@@ -2,7 +2,12 @@
 # your system. Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running 'nixos-help').
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 # Import the common packages from the shared location
 let
@@ -51,7 +56,10 @@ in
   services.xserver.desktopManager.gnome.enable = true;
 
   # Enable Nix Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Configure keyboard layout in X11
   services.xserver.xkb = {
@@ -64,8 +72,8 @@ in
 
   # Enable Bluetooth
   hardware.bluetooth = {
-    enable = true;       # Enables support for Bluetooth
-    powerOnBoot = true;  # Powers up the default Bluetooth controller on boot
+    enable = true; # Enables support for Bluetooth
+    powerOnBoot = true; # Powers up the default Bluetooth controller on boot
   };
 
   # Enable sound using PipeWire
@@ -84,7 +92,11 @@ in
   users.users.daniel = {
     isNormalUser = true;
     description = "Daniel";
-    extraGroups = [ "networkmanager" "wheel" "docker" ]; # Add user to groups
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ]; # Add user to groups
     shell = pkgs.zsh;
     packages = with pkgs; [ ]; # Add user-specific packages here
   };
@@ -93,14 +105,19 @@ in
   security.sudo.extraRules = [
     {
       users = [ "daniel" ];
-      commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ];
+      commands = [
+        {
+          command = "ALL";
+          options = [ "NOPASSWD" ];
+        }
+      ];
     }
   ];
 
   # Enable additional programs
   programs = {
     firefox.enable = true; # Install Firefox
-    nix-ld.enable = true;  # Enable nix-ld (for vscode-server)
+    nix-ld.enable = true; # Enable nix-ld (for vscode-server)
     zsh.enable = true;
   };
 
