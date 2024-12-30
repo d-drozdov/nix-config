@@ -81,6 +81,7 @@ in
           packages = with pkgs; [
 
           ];
+
         };
 
         programs = {
@@ -101,6 +102,11 @@ in
               # Initialize Oh My Posh with Zsh
               eval "$(oh-my-posh init zsh --config ${ohMyPoshConfig})"
             '';
+
+            shellAliases = {
+              # Note this alias will only work if nix-config is in the home directory
+              "nix-switch" = "darwin-rebuild switch --flake $HOME/nix-config/#darwin";
+            };
           };
 
           oh-my-posh = {
@@ -128,6 +134,13 @@ in
                 user = "git";
                 identitiesOnly = true;
                 identityFile = "/Users/${user}/.ssh/id_ed25519_github";
+              };
+              "homelab" = {
+                hostname = "100.123.25.72";
+                host = "homelab";
+                user = " daniel";
+                identitiesOnly = true;
+                identityFile = "/Users/${user}/.ssh/id_ed25519_homelab";
               };
             };
           };
