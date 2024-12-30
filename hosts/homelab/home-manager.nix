@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  dotfilesDir = ./dotfiles;
+  dotfilesDir = ../shared/dotfiles;
 in
 {
   home.stateVersion = "24.11";

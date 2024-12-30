@@ -133,7 +133,7 @@ in
   services = {
     openssh = {
       enable = true;
-      settings.PasswordAuthentication = false; # Disable SSH password authentication
+      settings.PasswordAuthentication = true; # Disable SSH password authentication
     };
 
     blueman.enable = true; # Enable Blueman Bluetooth Manager

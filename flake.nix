@@ -55,7 +55,7 @@
             ./hosts/homelab/services/home-assistant.nix # Service: Home Assistant
             home-manager.nixosModules.home-manager # Enable Home Manager
             {
-              home-manager.users.daniel = import ../../homelab/home-manager.nix; # User config for 'daniel'
+              home-manager.users.daniel = import ./hosts/homelab/home-manager.nix; # User config for 'daniel'
             }
           ];
         };
