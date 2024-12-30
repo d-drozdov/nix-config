@@ -9,8 +9,7 @@
   ...
 }:
 let
-  ohMyPoshConfig = ../shared/dotfiles/oh-my-posh.yaml;
-  alacrittyConfig = ../shared/dotfiles/alacritty.toml;
+  dotfilesDir = ../shared/dotfiles;
   user = "daniel";
   name = "Daniel Drozdov";
   email = "ddrozdov12@gmail.com";
@@ -96,12 +95,10 @@ in
                 "z"
                 "docker"
                 "aws"
+                "direnv"
               ];
             };
             initExtra = ''
-              
-              #Init direnv
-              eval "$(direnv hook zsh)"
             '';
 
             shellAliases = {
@@ -111,6 +108,7 @@ in
           };
 
           starship.enable = true;
+
 
           git = {
             enable = true;
@@ -144,7 +142,8 @@ in
             };
           };
         };
-        xdg.configFile."alacritty/alacritty.toml".text = builtins.readFile "${alacrittyConfig}";
+        xdg.configFile."alacritty/alacritty.toml".text = builtins.readFile "${dotfilesDir}/alacritty.toml";
+        xdg.configFile."starship.toml".text = builtins.readFile "${dotfilesDir}/starship.toml";
       };
 
   };

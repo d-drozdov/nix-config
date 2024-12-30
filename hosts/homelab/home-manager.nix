@@ -32,4 +32,6 @@ in
   programs.starship = {
     enable = true;
   };
+  xdg.configFile."starship.toml".text = builtins.readFile "${dotfilesDir}/starship.toml";
+
 }
