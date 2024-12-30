@@ -25,12 +25,11 @@ in
       ];
     };
     initExtra = ''
-      eval "$(oh-my-posh init zsh --config ${dotfilesDir}/oh-my-posh.yaml)"
     '';
 
   };
 
-  programs.oh-my-posh = {
+  programs.starship = {
     enable = true;
   };
 }

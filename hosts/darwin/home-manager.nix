@@ -99,8 +99,9 @@ in
               ];
             };
             initExtra = ''
-              # Initialize Oh My Posh with Zsh
-              eval "$(oh-my-posh init zsh --config ${ohMyPoshConfig})"
+              
+              #Init direnv
+              eval "$(direnv hook zsh)"
             '';
 
             shellAliases = {
@@ -109,9 +110,7 @@ in
             };
           };
 
-          oh-my-posh = {
-            enable = true;
-          };
+          starship.enable = true;
 
           git = {
             enable = true;

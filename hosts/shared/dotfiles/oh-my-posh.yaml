@@ -26,6 +26,11 @@ blocks:
         template: "<b>{{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if and (.BranchStatus) (or .Working.Changed .Staging.Changed (gt .StashCount 0)) }} | {{ end }}{{ if .Working.Changed }}\uF044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (or .Staging.Changed (gt .StashCount 0)) }} | {{ end }}{{ if .Staging.Changed }}\uF046 {{ .Staging.String }}{{ end }}{{ if and (.Staging.Changed) (gt .StashCount 0) }} | {{ end }}{{ if gt .StashCount 0 }}\uf0c7 {{ .StashCount }}{{ end }}</b>"
         properties:
           fetch_status: true
+      - type: nix-shell
+        style: powerline
+        foreground: blue
+        background: transparent
+        template: (nix-{{ .Type }})
 
     
   # Right-aligned execution time segment
