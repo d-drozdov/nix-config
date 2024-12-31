@@ -6,4 +6,5 @@ _:
   "google-drive"
   "cryptomator"
   "macos-fuse-t/cask/fuse-t"
+  "docker"
 ]
