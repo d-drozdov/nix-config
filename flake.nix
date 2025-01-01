@@ -2,7 +2,7 @@
   description = "My NixOS configuration managed with flakes";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # Main NixOS package source
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable"; # Main NixOS package source
     home-manager.url = "github:nix-community/home-manager"; # Home Manager integration
 
     # Mac Stuff
