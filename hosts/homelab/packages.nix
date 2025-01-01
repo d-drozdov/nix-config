@@ -13,4 +13,6 @@ shared-packages
   coreutils # Core Unix utilities
   bluez # Bluetooth stack
   bluez-tools # Additional Bluetooth tools
+  docker
+  docker-compose
 ]

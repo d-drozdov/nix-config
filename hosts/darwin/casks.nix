@@ -7,4 +7,5 @@ _:
   "cryptomator"
   "macos-fuse-t/cask/fuse-t"
   "docker"
+  "cursor"
 ]

@@ -14,8 +14,6 @@ with pkgs;
   htop
   lf
   awscli2
-  docker
-  docker-compose
   nixfmt-rfc-style
 
   # GUI Applications
