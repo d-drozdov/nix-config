@@ -12,4 +12,5 @@ shared-packages
   zoom-us
   devenv
   direnv
+  ngrok
 ]
