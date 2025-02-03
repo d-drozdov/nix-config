@@ -14,3 +14,12 @@
 ## Services:
 - [Open-WebUI](http://100.123.25.72:8123/)
 - [Home-Assistant](http://100.123.25.72:8080/)
+
+## Helpful Notes:
+
+If you ever get a NetworkManager-wait-online.service - Network Manager Wait Online error try the following:
+```bash
+sudo nixos-rebuild boot --flake .#homelab 
+sudo reboot
+sudo nixos-rebuild switch --flake .#homelab
+```
