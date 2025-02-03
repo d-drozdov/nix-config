@@ -15,6 +15,8 @@ with pkgs;
   lf
   awscli2
   nixfmt-rfc-style
+  direnv
+  devenv
 
   # GUI Applications
   alacritty

@@ -10,7 +10,5 @@ shared-packages
   alt-tab-macos
   rectangle
   zoom-us
-  devenv
-  direnv
   ngrok
 ]

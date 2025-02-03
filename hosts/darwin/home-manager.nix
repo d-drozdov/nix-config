@@ -72,58 +72,21 @@ in
         ...
       }:
       {
+        imports = [ ../shared/home-manager.nix ];
 
         home = {
           enableNixpkgsReleaseCheck = false;
           stateVersion = "24.11";
-
-          packages = with pkgs; [
-
-          ];
-
+          packages = with pkgs; [ ];
         };
 
         programs = {
-          zsh = {
-            enable = true;
-            enableCompletion = true;
-            syntaxHighlighting.enable = true;
-            oh-my-zsh = {
-              enable = true;
-              plugins = [
-                "git"
-                "z"
-                "docker"
-                "aws"
-                "direnv"
-              ];
-            };
-            initExtra = ''
-            '';
-
-            shellAliases = {
-              # Note this alias will only work if nix-config is in the home directory
-              "nix-switch" = "darwin-rebuild switch --flake $HOME/nix-config/#darwin";
-            };
+          # Darwin-specific ZSH additions
+          zsh.shellAliases = {
+            "nix-switch" = "darwin-rebuild switch --flake $HOME/nix-config/#darwin";
           };
 
-          starship.enable = true;
-
-
-          git = {
-            enable = true;
-            ignores = [
-              "*.swp"
-              "*.DS_Store"
-            ];
-            userName = name;
-            userEmail = email;
-            lfs.enable = true;
-            extraConfig = {
-              init.defaultBranch = "main";
-            };
-          };
-
+          # Darwin-specific SSH configuration
           ssh = {
             enable = true;
             matchBlocks = {
@@ -142,10 +105,6 @@ in
             };
           };
         };
-        xdg.configFile."alacritty/alacritty.toml".text = builtins.readFile "${dotfilesDir}/alacritty.toml";
-        xdg.configFile."starship.toml".text = builtins.readFile "${dotfilesDir}/starship.toml";
       };
-
   };
-
 }
