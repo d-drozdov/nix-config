@@ -15,6 +15,17 @@
 - [Open-WebUI](http://100.123.25.72:8123/)
 - [Home-Assistant](http://100.123.25.72:8080/)
 
+## Fresh Install Steps:
+
+1. Clone repo
+1. In home manager config uncomment persisent others
+1. Install nix using determinate installer
+1. Run the following:
+```bash
+nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#darwin
+```
+5. Comment out persistent others
+
 ## Helpful Notes:
 
 If you ever get a NetworkManager-wait-online.service - Network Manager Wait Online error try the following:

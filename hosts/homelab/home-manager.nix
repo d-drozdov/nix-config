@@ -8,30 +8,7 @@ in
   home.username = config.home.overrideUsername or "daniel";
   home.homeDirectory = "/home/${config.home.overrideUsername or "daniel"}";
 
-  home.packages = with pkgs; [ ];
+  imports = [ ../shared/home-manager.nix ];
 
-  # Zsh
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    syntaxHighlighting.enable = true;
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "git"
-        "z"
-        "docker"
-        "aws"
-      ];
-    };
-    initExtra = ''
-    '';
-
-  };
-
-  programs.starship = {
-    enable = true;
-  };
-  xdg.configFile."starship.toml".text = builtins.readFile "${dotfilesDir}/starship.toml";
-
+  home.packages = with pkgs; [ ]; 
 }

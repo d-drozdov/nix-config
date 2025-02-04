@@ -114,11 +114,13 @@ in
           "${pkgs.spotify}/Applications/Spotify.app"
           "/System/Applications/Messages.app"
         ];
-        persistent-others = [
-          "/Users/${user}/Pictures/Screenshots"
-          "/Users/${user}/Downloads"
-        ];
+        # Recomment if on new machine
+        # persistent-others = [
+        #   "/Users/${user}/Pictures/Screenshots"
+        #   "/Users/${user}/Downloads"
+        # ];
       };
+
 
       finder = {
         AppleShowAllExtensions = true;
