@@ -8,4 +8,5 @@ _:
   "macos-fuse-t/cask/fuse-t"
   "docker"
   "cursor"
+  "istat-menus@6"
 ]
