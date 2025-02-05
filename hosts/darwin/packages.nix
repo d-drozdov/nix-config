@@ -11,4 +11,6 @@ shared-packages
   rectangle
   zoom-us
   ngrok
+  flutter
+  cocoapods
 ]
