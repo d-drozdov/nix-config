@@ -9,4 +9,5 @@ _:
   "docker"
   "cursor"
   "istat-menus@6"
+  "brave-browser"
 ]

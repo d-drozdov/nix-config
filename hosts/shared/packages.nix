@@ -22,5 +22,4 @@ with pkgs;
   alacritty
   spotify
   vscode
-  brave
 ]
