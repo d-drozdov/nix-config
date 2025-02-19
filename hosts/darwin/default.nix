@@ -16,11 +16,12 @@ in
     ./home-manager.nix
   ];
 
+
   # Use TouchID for sudo
   security.pam.enableSudoTouchIdAuth = true;
 
   # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
+  # services.nix-daemon.enable = true;
 
   # Setup user, packages, programs
   nix = {
@@ -31,7 +32,6 @@ in
     ];
 
     gc = {
-      user = "root";
       automatic = true;
       interval = {
         Weekday = 0;
@@ -78,7 +78,7 @@ in
   fonts.packages = sharedFonts;
 
   system = {
-    stateVersion = 4;
+    stateVersion = 5;
 
     defaults = {
       NSGlobalDomain = {
