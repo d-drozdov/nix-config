@@ -11,7 +11,7 @@
 
 # Import the common packages from the shared location
 let
-  packages = import ../shared/packages.nix { inherit pkgs; };
+  packages = import ./packages.nix { inherit pkgs; };
   sharedFonts = import ../shared/fonts.nix { inherit pkgs; };
 in
 {
