@@ -15,5 +15,4 @@ shared-packages
   bluez-tools # Additional Bluetooth tools
   docker
   docker-compose
-  speedtest-cli
 ]

@@ -17,6 +17,7 @@ with pkgs;
   nixfmt-rfc-style
   direnv
   devenv
+  speedtest-cli
 
   # GUI Applications
   alacritty
